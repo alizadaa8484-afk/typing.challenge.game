@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyMagnet | TypeMaster</title>
+    
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #293248;
+    font-size: 12px;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span, h1 span {
+    color: #4de0c1;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.heading h1 {
+    font-size: 34px;
+    margin: 15px 0;
+}
+
+.heading p {
+    color: #cbd5e1;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.heading .tagline {
+    color: #4de0c1;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.home-btn {
+    display: inline-block;
+    background: #202b43;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+select, button {
+    padding: 10px 13px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+select {
+    background: #151e33;
+    color: white;
+    border: 1px solid #35415a;
+}
+
+button {
+    background: #4de0c1;
+    color: #07111b;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #28c6a5;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.stats div {
+    background: #151e33;
+    border: 1px solid #293248;
+    border-radius: 9px;
+    padding: 13px 20px;
+    color: #cbd5e1;
+}
+
+.stats strong {
+    color: #4de0c1;
+    margin-left: 5px;
+}
+
+.target-box {
+    background: #151e33;
+    border: 1px solid #293248;
+    border-radius: 14px;
+    text-align: center;
+    padding: 22px;
+}
+
+.target-box p {
+    color: #cbd5e1;
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+#target {
+    color: #4de0c1;
+    font-size: 65px;
+    font-weight: bold;
+    margin: 12px;
+}
+
+#message {
+    color: #4de0c1;
+    min-height: 16px;
+}
+
+#message.wrong {
+    color: #ff7373;
+}
+
+.keyboard-box {
+    margin-top: 22px;
+    padding: 20px 10px;
+    background: #111a2e;
+    border: 1px solid #293248;
+    border-radius: 14px;
+}
+
+.keyboard-box h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.key-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.key {
+    width: 45px;
+    height: 43px;
+    background: #202b43;
+    border: 1px solid #3b4963;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.15s;
+}
+
+.key.target-key {
+    background: #4de0c1;
+    color: #07111b;
+    border-color: #4de0c1;
+    transform: translateY(-3px);
+}
+
+.key.correct {
+    background: #80e89a;
+    color: #07111b;
+}
+
+.key.wrong {
+    background: #ff7373;
+    color: #07111b;
+}
+
+
+
+#mobileInput {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    opacity: 0.01;
+    left: 50%;
+    bottom: 5px;
+    font-size: 16px;
+}
+
+
+.results {
+    text-align: center;
+    background: #151e33;
+    border: 1px solid #293248;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.results h2 {
+    color: #4de0c1;
+    margin-bottom: 15px;
+}
+
+.results p {
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.results a {
+    margin-left: 8px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    color: #8190aa;
+    border-top: 1px solid #293248;
+    padding: 20px;
+    margin-top: 25px;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    .heading h1 {
+        font-size: 27px;
+    }
+
+    .key {
+        width: 8vw;
+        height: 38px;
+        font-size: 11px;
+    }
+
+    .key-row {
+        gap: 3px;
+    }
+
+    .stats div {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Type<span>Master</span></a>
+    <span>KeyMagnet Challenge</span>
+</header>
+
+<main>
+    <section class="heading">
+        <a href="index.html" class="home-btn">← Home</a>
+        <p class="tagline">IMPROVE YOUR KEYBOARD ACCURACY</p>
+        <h1>Key<span>Magnet</span> Challenge</h1>
+        <p>Find the target letter and press the matching key!</p>
+    </section>
+
+    <section class="settings">
+        <label for="keySet">Key Set:</label>
+        <select id="keySet">
+            <option value="home">Home Row</option>
+            <option value="top">Top Row</option>
+            <option value="mixed">Mixed Letters</option>
+        </select>
+
+        <label for="difficulty">Level:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <button id="startBtn">Start Game</button>
+        <button id="restartBtn">Restart</button>
+        <button id="resetBtn">Reset</button>
+    </section>
+
+    <section class="stats">
+        <div>Score <strong id="score">0</strong></div>
+        <div>Correct <strong id="correct">0</strong></div>
+        <div>Incorrect <strong id="incorrect">0</strong></div>
+        <div>Time <strong><span id="time">60</span>s</strong></div>
+    </section>
+
+    <section class="target-box">
+        <p>YOUR TARGET KEY</p>
+        <div id="target">A</div>
+        <p id="progress">Target 0 of 20</p>
+        <p id="message" aria-live="polite">Press Start Game to begin.</p>
+
+        
+<input
+    type="text"
+    id="mobileInput"
+    maxlength="1"
+    autocomplete="off"
+    autocapitalize="characters"
+    aria-label="Type target letter"
+/>
+
+
+        <p>Average Response: <strong id="response">0.00 s</strong></p>
+    </section>
+
+    <section class="keyboard-box">
+        <h2>Keyboard Layout</h2>
+        <div id="keyboard" class="keyboard"></div>
+    </section>
+
+    <section id="results" class="results" hidden>
+        <h2 id="resultTitle">Session Complete!</h2>
+        <p id="resultText"></p>
+        <button id="playAgainBtn">Play Again</button>
+        <a href="index.html" class="home-btn">Home Page</a>
+    </section>
+</main>
+
+<footer>Typing Challenge Game | Web Technologies Lab Mid</footer>
+
+
+
+<script>
+    
+
+const target = document.getElementById("target");
+const keyboard = document.getElementById("keyboard");
+const message = document.getElementById("message");
+const results = document.getElementById("results");
+const mobileInput = document.getElementById("mobileInput");
+
+const keySets = {
+    home: "ASDFJKL",
+    top: "QWERTYUIOP",
+    mixed: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+};
+
+const levels = {
+    easy: { time: 60, points: 10 },
+    medium: { time: 45, points: 15 },
+    hard: { time: 30, points: 20 }
+};
+
+let letters = [];
+let current = 0;
+let score = 0;
+let correct = 0;
+let incorrect = 0;
+let time = 60;
+let running = false;
+let startedAt = 0;
+let responseTotal = 0;
+let gameTimer;
+
+function renderKeyboard() {
+    keyboard.innerHTML = "";
+
+    ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"].forEach(row => {
+        const rowBox = document.createElement("div");
+        rowBox.className = "key-row";
+
+        [...row].forEach(letter => {
+            const key = document.createElement("div");
+            key.className = "key";
+            key.id = "key-" + letter;
+            key.textContent = letter;
+            rowBox.appendChild(key);
+        });
+
+        keyboard.appendChild(rowBox);
+    });
+}
+
+function showTarget() {
+    if (current >= letters.length) {
+        endGame("All Targets Completed!");
+        return;
+    }
+
+    target.textContent = letters[current];
+
+    document.getElementById("progress").textContent =
+        `Target ${current + 1} of ${letters.length}`;
+
+    document.querySelectorAll(".key").forEach(key => {
+        key.classList.remove("target-key", "correct", "wrong");
+    });
+
+    const key = document.getElementById("key-" + letters[current]);
+
+    if (key) {
+        key.classList.add("target-key");
+    }
+
+    startedAt = Date.now();
+}
+
+function startGame() {
+    clearInterval(gameTimer);
+
+    const set = document.getElementById("keySet").value;
+    const level = document.getElementById("difficulty").value;
+    const settings = levels[level];
+
+    letters = [];
+    const available = keySets[set];
+
+    for (let i = 0; i < 20; i++) {
+        letters.push(
+            available[Math.floor(Math.random() * available.length)]
+        );
+    }
+
+    current = 0;
+    score = 0;
+    correct = 0;
+    incorrect = 0;
+    responseTotal = 0;
+    time = settings.time;
+    running = true;
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("correct").textContent = correct;
+    document.getElementById("incorrect").textContent = incorrect;
+    document.getElementById("time").textContent = time;
+    document.getElementById("response").textContent = "0.00 s";
+
+    document.getElementById("startBtn").disabled = true;
+
+    message.className = "";
+    message.textContent = "Press the highlighted key!";
+
+    results.hidden = true;
+
+    showTarget();
+
+    gameTimer = setInterval(() => {
+        time--;
+
+        document.getElementById("time").textContent = time;
+
+        if (time <= 0) {
+            endGame("Time's Up!");
+        }
+    }, 1000);
+}
+
+function handleKey(event) {
+
+    if (event.target === mobileInput) return;
+
+    if (!running || !/^[a-z]$/i.test(event.key)) return;
+
+    checkLetter(event.key);
+}
+
+function checkLetter(letter) {
+
+    if (!running || !/^[a-z]$/i.test(letter)) return;
+
+    const pressed = letter.toUpperCase();
+    const expected = letters[current];
+
+    const key = document.getElementById("key-" + pressed);
+
+    if (pressed === expected) {
+
+        correct++;
+
+        const level = document.getElementById("difficulty").value;
+
+        score += levels[level].points;
+
+        responseTotal += (Date.now() - startedAt) / 1000;
+
+        if (key) {
+            key.classList.add("correct");
+        }
+
+        message.textContent = "Correct! Well done.";
+        message.className = "";
+
+        document.getElementById("score").textContent = score;
+        document.getElementById("correct").textContent = correct;
+
+        document.getElementById("response").textContent =
+            (responseTotal / correct).toFixed(2) + " s";
+
+        current++;
+
+        if (current >= letters.length) {
+            endGame("All Targets Completed!");
+        } else {
+            showTarget();
+        }
+
+    } else {
+
+        incorrect++;
+
+        document.getElementById("incorrect").textContent = incorrect;
+
+        message.textContent = "Wrong key! Try " + expected;
+        message.className = "wrong";
+
+        if (key) {
+            key.classList.add("wrong");
+
+            setTimeout(() => {
+                key.classList.remove("wrong");
+            }, 300);
+        }
+    }
+}
+
+// Mobile keyboard input
+mobileInput.addEventListener("input", function () {
+
+    const letter = this.value.trim();
+
+    if (letter) {
+        checkLetter(letter);
+    }
+
+    this.value = "";
+});
+
+function endGame(title) {
+
+    if (!running) return;
+
+    running = false;
+
+    clearInterval(gameTimer);
+
+    document.getElementById("startBtn").disabled = false;
+
+    document.querySelectorAll(".key").forEach(key => {
+        key.classList.remove("target-key");
+    });
+
+    results.hidden = false;
+
+    document.getElementById("resultTitle").textContent = title;
+
+    document.getElementById("resultText").textContent =
+        `Score: ${score} | Correct: ${correct} | Incorrect: ${incorrect} | ` +
+        `Average Response: ${
+            correct ? (responseTotal / correct).toFixed(2) : "0.00"
+        } seconds`;
+
+    message.textContent = "Session finished!";
+
+    mobileInput.blur();
+}
+
+function resetGame() {
+
+    running = false;
+
+    clearInterval(gameTimer);
+
+    current = 0;
+    score = 0;
+    correct = 0;
+    incorrect = 0;
+    responseTotal = 0;
+    time = levels[document.getElementById("difficulty").value].time;
+    letters = [];
+
+    target.textContent = "A";
+
+    document.getElementById("progress").textContent = "Target 0 of 20";
+    document.getElementById("score").textContent = "0";
+    document.getElementById("correct").textContent = "0";
+    document.getElementById("incorrect").textContent = "0";
+    document.getElementById("time").textContent = time;
+    document.getElementById("response").textContent = "0.00 s";
+
+    message.textContent = "Press Start Game to begin.";
+    message.className = "";
+
+    results.hidden = true;
+
+    document.getElementById("startBtn").disabled = false;
+
+    document.querySelectorAll(".key").forEach(key => {
+        key.classList.remove("target-key", "correct", "wrong");
+    });
+
+    mobileInput.value = "";
+    mobileInput.blur();
+}
+
+// Buttons
+document.getElementById("startBtn").addEventListener("click", () => {
+    startGame();
+    mobileInput.focus();
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+    startGame();
+    mobileInput.focus();
+});
+
+document.getElementById("resetBtn").addEventListener("click", resetGame);
+
+document.getElementById("playAgainBtn").addEventListener("click", () => {
+    startGame();
+    mobileInput.focus();
+});
+
+
+document.addEventListener("keydown", handleKey);
+
+
+renderKeyboard();
+
+
+
+</script>
+</body>
+</html>

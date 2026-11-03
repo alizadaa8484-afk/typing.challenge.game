@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Challenge Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0b1020;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        header {
+            height: 56px;
+            padding: 0 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #293248;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo span,
+        .hero h1 span {
+            color: #4de0c1;
+        }
+
+        header p {
+            font-size: 11px;
+            color: #cbd5e1;
+        }
+
+        /* Main Section */
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 55px 15px 30px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .tagline {
+            color: #4de0c1;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .description {
+            color: #cbd5e1;
+            font-size: 12px;
+            line-height: 22px;
+            max-width: 390px;
+            margin: auto;
+        }
+
+        /* Game Cards */
+        .game-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .card {
+            background-color: #151e33;
+            border: 1px solid #2b3853;
+            border-radius: 13px;
+            padding: 25px 23px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #4de0c1;
+        }
+
+        .game-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            font-size: 12px;
+            line-height: 21px;
+            min-height: 42px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #4de0c1;
+            color: #07111b;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #28c6a5;
+            transform: scale(1.04);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #293248;
+            margin-top: 45px;
+            padding-top: 18px;
+            text-align: center;
+            color: #a9b7d0;
+            font-size: 10px;
+        }
+
+        /* Mobile Screen */
+        @media (max-width: 600px) {
+            header {
+                padding: 0 5%;
+            }
+
+            main {
+                padding-top: 40px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .game-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card p {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Type<span>Master</span></div>
+        <p>Typing Challenge Game</p>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p class="tagline">IMPROVE YOUR TYPING SKILLS</p>
+
+            <h1>
+                Ready to Test Your <span>Typing<br>Speed?</span>
+            </h1>
+
+            <p class="description">
+                Challenge your reflexes, improve your accuracy,
+                and become a typing master.
+            </p>
+        </section>
+
+        <section class="game-cards">
+
+            <!-- Bubbles Game Card -->
+            <div class="card">
+                <div class="game-icon">🫧</div>
+
+                <h2>Bubbles</h2>
+
+                <p>
+                    Catch the floating letters before they reach
+                    the top. Test your reaction speed!
+                </p>
+
+                <button onclick="location.href='bubbles.html'">
+                  Play Bubbles →
+                </button>
+            </div>
+
+            <!-- KeyMagnet Game Card -->
+            <div class="card">
+                <div class="game-icon">⌨️</div>
+
+                <h2>KeyMagnet</h2>
+
+                <p>
+                    Find and press the correct keyboard key.
+                    Improve your precision and accuracy!
+                </p>
+
+                <button onclick="location.href='keymagnet.html'">
+                    Play KeyMagnet →
+                </button>
+            </div>
+
+        </section>
+
+        <footer>
+            Typing Challenge Game | Web Technologies Lab Mid
+        </footer>
+
+    </main>
+
+    <script>
+        function playGame(game) {
+            if (game === "bubbles") {
+                alert("Bubbles Game will be added on its own page!");
+            } else if (game === "keymagnet") {
+                alert("KeyMagnet Game will be added on its own page!");
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubbles Challenge | TypeMaster</title>
+    
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 8%;
+    border-bottom: 1px solid #293248;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span, h1 span {
+    color: #4de0c1;
+}
+
+.nav-text {
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.heading h1 {
+    font-size: 36px;
+    margin: 15px 0;
+}
+
+.heading p {
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.tagline {
+    color: #4de0c1 !important;
+    font-size: 10px !important;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.home-btn {
+    display: inline-block;
+    background: #202b43;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+select, button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+select {
+    background: #151e33;
+    color: white;
+    border: 1px solid #35415a;
+}
+
+button {
+    background: #4de0c1;
+    color: #07111b;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #28c6a5;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stats div {
+    background: #151e33;
+    border: 1px solid #293248;
+    padding: 13px 24px;
+    border-radius: 9px;
+    color: #cbd5e1;
+}
+
+.stats strong {
+    color: #4de0c1;
+    margin-left: 8px;
+}
+
+.message {
+    text-align: center;
+    color: #4de0c1;
+    margin: 18px 0;
+    font-size: 13px;
+    min-height: 18px;
+}
+
+.message.wrong {
+    color: #ff7373;
+}
+
+.arena {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    background: #111a2e;
+    border: 1px solid #293248;
+    border-radius: 14px;
+}
+
+.placeholder {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #8190aa;
+    font-size: 14px;
+}
+
+.bubble {
+    position: absolute;
+    bottom: 10px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #4de0c1;
+    color: #07111b;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 0 18px #4de0c155;
+    cursor: default;
+}
+
+.bubble.correct {
+    background: #7cff9b;
+    transform: scale(1.2);
+}
+
+.bubble.wrong {
+    background: #ff7373;
+}
+
+.results {
+    text-align: center;
+    background: #151e33;
+    border: 1px solid #293248;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.results h2 {
+    color: #4de0c1;
+    margin-bottom: 12px;
+}
+
+.results p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.results a {
+    margin-left: 8px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    color: #8190aa;
+    border-top: 1px solid #293248;
+    padding: 20px;
+    margin-top: 25px;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    .heading h1 {
+        font-size: 29px;
+    }
+
+    .arena {
+        height: 320px;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stats div {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Type<span>Master</span></a>
+    <span class="nav-text">Bubbles Challenge</span>
+</header>
+
+<main>
+    <section class="heading">
+        <a href="index.html" class="home-btn">← Home</a>
+        <p class="tagline">TEST YOUR REACTION SPEED</p>
+        <h1>Bubbles <span>Challenge</span></h1>
+        <p>Press the matching letter before the bubble reaches the top!</p>
+    </section>
+
+    <section class="settings">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <button id="startBtn">Start Game</button>
+        <button id="restartBtn">Restart</button>
+        <button id="resetBtn">Reset</button>
+    </section>
+
+    <section class="stats">
+        <div>Score <strong id="score">0</strong></div>
+        <div>Misses <strong id="misses">0 / 6</strong></div>
+        <div>Time <strong><span id="time">60</span>s</strong></div>
+    </section>
+
+    <p id="message" class="message" aria-live="polite">
+        Choose a difficulty and press Start Game.
+    </p>
+
+    <section id="arena" class="arena">
+        <p class="placeholder">Your bubbles will appear here!</p>
+    </section>
+
+    <section id="results" class="results" hidden>
+        <h2 id="resultTitle">Game Over!</h2>
+        <p id="resultText"></p>
+        <button id="playAgainBtn">Play Again</button>
+        <a href="index.html" class="home-btn">Home Page</a>
+    </section>
+</main>
+
+<footer>Typing Challenge Game | Web Technologies Lab Mid</footer>
+
+
+
+<script>
+
+const arena = document.getElementById("arena");
+const scoreText = document.getElementById("score");
+const missesText = document.getElementById("misses");
+const timeText = document.getElementById("time");
+const message = document.getElementById("message");
+const results = document.getElementById("results");
+const mobileInput = document.getElementById("mobileInput");
+
+let bubbles = [];
+let score = 0;
+let misses = 0;
+let time = 60;
+let running = false;
+
+let gameTimer;
+let moveTimer;
+let spawnTimer;
+
+let settings;
+let startTime;
+
+const levels = {
+    easy: { speed: 1, spawn: 1800 },
+    medium: { speed: 2, spawn: 1300 },
+    hard: { speed: 3, spawn: 900 }
+};
+
+// Create bubbles
+function createBubble() {
+    if (!running) return;
+
+    const bubble = document.createElement("div");
+
+    bubble.className = "bubble";
+
+    bubble.textContent =
+        String.fromCharCode(65 + Math.floor(Math.random() * 26));
+
+    bubble.style.left =
+        Math.random() * Math.max(0, arena.clientWidth - 50) + "px";
+
+    bubble.style.bottom = "0px";
+
+    arena.appendChild(bubble);
+
+    bubbles.push({
+        element: bubble,
+        y: 0
+    });
+}
+
+// Move bubbles upward
+function moveBubbles() {
+    if (!running) return;
+
+    for (let i = bubbles.length - 1; i >= 0; i--) {
+
+        const b = bubbles[i];
+
+        b.y += settings.speed;
+
+        b.element.style.bottom = b.y + "px";
+
+        if (b.y >= arena.clientHeight - 50) {
+
+            b.element.remove();
+
+            bubbles.splice(i, 1);
+
+            misses++;
+
+            missesText.textContent = misses + " / 6";
+
+            message.textContent = "Bubble missed!";
+            message.className = "message wrong";
+
+            if (misses >= 6) {
+                endGame("Game Over!");
+                return;
+            }
+        }
+    }
+}
+
+// Start game
+function startGame() {
+
+    stopTimers();
+    clearBubbles();
+
+    score = 0;
+    misses = 0;
+    time = 60;
+
+    running = true;
+
+    startTime = Date.now();
+
+    const level = document.getElementById("difficulty").value;
+
+    settings = { ...levels[level] };
+
+    scoreText.textContent = "0";
+    missesText.textContent = "0 / 6";
+    timeText.textContent = "60";
+
+    message.textContent = "Type the matching letter!";
+    message.className = "message";
+
+    results.hidden = true;
+
+    document.getElementById("startBtn").disabled = true;
+
+    // Create five bubbles at the start
+    for (let i = 0; i < 5; i++) {
+        createBubble();
+    }
+
+    // Increase difficulty
+    spawnTimer = setInterval(() => {
+
+        if (!running) return;
+
+        const elapsed =
+            Math.floor((Date.now() - startTime) / 15000);
+
+        settings.speed = levels[level].speed + elapsed;
+
+        const amount =
+            elapsed >= 2 ? 3 : elapsed >= 1 ? 2 : 1;
+
+        for (let i = 0; i < amount; i++) {
+            createBubble();
+        }
+
+    }, settings.spawn);
+
+    // Move bubbles
+    moveTimer = setInterval(moveBubbles, 40);
+
+    // Timer
+    gameTimer = setInterval(() => {
+
+        time--;
+
+        timeText.textContent = time;
+
+        if (time <= 0) {
+            endGame("Time's Up!");
+        }
+
+    }, 1000);
+}
+
+// Check laptop keyboard
+function handleKey(event) {
+
+    if (!running) return;
+
+    if (event.target === mobileInput) return;
+
+    if (!/^[a-z]$/i.test(event.key)) return;
+
+    checkLetter(event.key);
+}
+
+// Check entered letter
+function checkLetter(letter) {
+
+    if (!running || !/^[a-z]$/i.test(letter)) return;
+
+    const key = letter.toUpperCase();
+
+    const index = bubbles.findIndex(
+        b => b.element.textContent === key
+    );
+
+    if (index !== -1) {
+
+        bubbles[index].element.remove();
+
+        bubbles.splice(index, 1);
+
+        score += 10;
+
+        message.textContent = "Correct! +10 points";
+        message.className = "message";
+
+    } else {
+
+        score = Math.max(0, score - 2);
+
+        message.textContent = "Wrong key! -2 points";
+        message.className = "message wrong";
+    }
+
+    scoreText.textContent = score;
+}
+
+// Mobile keyboard
+if (mobileInput) {
+
+    mobileInput.addEventListener("input", function () {
+
+        const letter = this.value;
+
+        if (letter) {
+            checkLetter(letter);
+        }
+
+        this.value = "";
+    });
+}
+
+// End game
+function endGame(title) {
+
+    if (!running) return;
+
+    running = false;
+
+    stopTimers();
+
+    document.getElementById("startBtn").disabled = false;
+
+    results.hidden = false;
+
+    document.getElementById("resultTitle").textContent = title;
+
+    document.getElementById("resultText").textContent =
+        `Score: ${score} | Misses: ${misses} / 6 | Time left: ${time}s`;
+
+    message.textContent = "Game finished!";
+
+    if (mobileInput) {
+        mobileInput.blur();
+    }
+}
+
+// Clear bubbles
+function clearBubbles() {
+
+    bubbles.forEach(b => {
+        b.element.remove();
+    });
+
+    bubbles = [];
+
+    arena.innerHTML = "";
+}
+
+// Stop timers
+function stopTimers() {
+
+    clearInterval(gameTimer);
+    clearInterval(moveTimer);
+    clearInterval(spawnTimer);
+}
+
+// Reset game
+function resetGame() {
+
+    running = false;
+
+    stopTimers();
+    clearBubbles();
+
+    score = 0;
+    misses = 0;
+    time = 60;
+
+    scoreText.textContent = "0";
+    missesText.textContent = "0 / 6";
+    timeText.textContent = "60";
+
+    message.textContent =
+        "Choose a difficulty and press Start Game.";
+
+    message.className = "message";
+
+    results.hidden = true;
+
+    document.getElementById("startBtn").disabled = false;
+
+    arena.innerHTML =
+        '<p class="placeholder">Your bubbles will appear here!</p>';
+
+    if (mobileInput) {
+        mobileInput.value = "";
+        mobileInput.blur();
+    }
+}
+
+// Start button
+document.getElementById("startBtn").addEventListener("click", () => {
+
+    startGame();
+
+    if (mobileInput) {
+        mobileInput.focus();
+    }
+});
+
+// Restart button
+document.getElementById("restartBtn").addEventListener("click", () => {
+
+    startGame();
+
+    if (mobileInput) {
+        mobileInput.focus();
+    }
+});
+
+// Reset button
+document.getElementById("resetBtn").addEventListener("click", resetGame);
+
+// Play again button
+document.getElementById("playAgainBtn").addEventListener("click", () => {
+
+    startGame();
+
+    if (mobileInput) {
+        mobileInput.focus();
+    }
+});
+
+// Laptop keyboard
+document.addEventListener("keydown", handleKey);
+</script>
+
+
+</body>
+</html>
